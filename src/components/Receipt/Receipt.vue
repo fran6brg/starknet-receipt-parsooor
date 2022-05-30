@@ -35,5 +35,10 @@ onErrorCaptured((error) => {
 </script>
 
 <template>
-	<pre>{{ receipt }}</pre>
+	<div class="flex flex-col gap-6">
+		<a :href="`https://goerli.voyager.online/tx/${props.hash}`" rel="nofollow noopener" target="_blank">
+			<p class="flex items-center text-xs">Open in Goerli</p>
+		</a>
+		<pre>{{ receipt }}</pre>
+	</div>
 </template>
