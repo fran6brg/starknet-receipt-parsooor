@@ -1,9 +1,23 @@
+<script setup lang="ts">
+import { useApp } from "~/composables";
+
+/**
+ * state
+ */
+
+// imports
+const { state } = useApp();
+
+// refs
+// computeds
+// watchers
+// hooks
+</script>
+
 <template>
 	<Page>
-		<PageContent class="text-xs">
-			<div class="h-full flex flex-col justify-center items-center gap-6">
-				<!--  -->
-			</div>
+		<PageContent>
+			<pre v-if="state.error">{{ state.error }}</pre>
 		</PageContent>
 	</Page>
 </template>

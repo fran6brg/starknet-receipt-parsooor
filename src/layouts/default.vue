@@ -3,6 +3,10 @@ import { useApp } from "~/composables";
 
 // imports
 const { state, initApp } = useApp();
+const route = useRoute();
+const router = useRouter();
+console.log(route.path);
+if (!route.path.includes("/goerli/")) router.push(`/goerli/insert-your-transaction-hash-here`);
 
 // hooks
 onMounted(async () => {

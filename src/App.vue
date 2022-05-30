@@ -12,6 +12,7 @@ const { state } = useApp();
 // computeds
 // watchers
 // hooks
+
 onErrorCaptured((error) => {
 	state.error = new Error(JSON.stringify(error));
 	console.warn("pages/App", error);

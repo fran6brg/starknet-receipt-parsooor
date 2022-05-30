@@ -5,13 +5,14 @@ import Receipt from "~/components/Receipt/Receipt.vue";
  * props
  */
 
-defineProps({
+const props = defineProps({
 	hash: {
 		type: String,
 		required: true,
 		default: "",
 	},
 });
+console.log("[hash].vue", props.hash);
 
 /**
  * state
@@ -19,6 +20,8 @@ defineProps({
 
 // imports
 // refs
+const askForHash = computed((): boolean => props.hash === "insert-your-transaction-hash-here");
+
 // computeds
 // watchers
 // hooks
@@ -29,13 +32,14 @@ onErrorCaptured((error) => {
 
 <template>
 	<Page>
-		<PageContent class="text-xs">
-			<Suspense>
+		<PageContent>
+			<p v-if="askForHash">Insert a transaction hash in the URL ⬆️</p>
+			<Suspense v-else>
 				<!-- main content -->
 				<Receipt :hash="hash" />
 
 				<!-- loading state -->
-				<template #fallback> Loading... </template>
+				<template #fallback>Loading...</template>
 			</Suspense>
 		</PageContent>
 	</Page>

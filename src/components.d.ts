@@ -11,6 +11,7 @@ declare module 'vue' {
     PageContent: typeof import('./components/App/Layout/PageContent.vue')['default']
     README: typeof import('./components/README.md')['default']
     Receipt: typeof import('./components/Receipt/Receipt.vue')['default']
+    'Uil:twitter': typeof import('~icons/uil/twitter')['default']
   }
 }
 
