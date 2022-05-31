@@ -4,10 +4,10 @@
 			<div class="flex items-center gap-2">
 				<uil:twitter class="w-4 h-4" />
 				<a href="https://twitter.com/fran6brg" rel="nofollow noopener" target="_blank">
-					<p class="flex items-center text-xs">@fran6brg</p>
+					<p class="flex items-center text-xs hover:underline">@fran6brg</p>
 				</a>
 				<a href="https://mobile.twitter.com/Mersona5" rel="nofollow noopener" target="_blank">
-					<p class="flex items-center text-xs">@Mersona5</p>
+					<p class="flex items-center text-xs hover:underline">@Mersona5</p>
 				</a>
 			</div>
 			<p class="text-xs font-ptmono font-bold">|</p>
