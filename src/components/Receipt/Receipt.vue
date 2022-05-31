@@ -38,8 +38,7 @@ onErrorCaptured((error) => {
 	<div class="flex flex-col gap-6">
 		<a :href="`https://goerli.voyager.online/tx/${props.hash}`" rel="nofollow noopener" target="_blank" class="flex gap-1 items-center group">
 			<p class="flex items-center text-xs">View in <span class="group-hover:underline ml-1.5">goerli.voyager.online</span></p>
-			<!-- <ic:baseline-open-in-new class="w-3 h-3" /> -->
 		</a>
-		<pre>{{ receipt }}</pre>
+		<pre class="wsc-text-default">{{ receipt }}</pre>
 	</div>
 </template>

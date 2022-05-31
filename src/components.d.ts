@@ -6,7 +6,6 @@ declare module 'vue' {
   export interface GlobalComponents {
     Footer: typeof import('./components/App/Footer/Footer.vue')['default']
     Header: typeof import('./components/App/Header/Header.vue')['default']
-    'Ic:baselineOpenInNew': typeof import('~icons/ic/baseline-open-in-new')['default']
     Logo: typeof import('./components/System/Logo.vue')['default']
     Page: typeof import('./components/App/Layout/Page.vue')['default']
     PageContent: typeof import('./components/App/Layout/PageContent.vue')['default']
