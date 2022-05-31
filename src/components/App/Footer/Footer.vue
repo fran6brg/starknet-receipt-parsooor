@@ -10,7 +10,10 @@
 					<p class="flex items-center text-xs">@Mersona5</p>
 				</a>
 			</div>
-			<p class="text-xs font-ptmono font-bold">| IPFS hosted</p>
+			<p class="text-xs font-ptmono font-bold">|</p>
+			<a href="https://starknet-receipt-parsooor.fran6.eth.limo" rel="nofollow noopener" target="_blank">
+				<p class="text-xs font-ptmono font-bold"><span class="hover:underline">IPFS hosted</span></p>
+			</a>
 		</div>
 	</footer>
 </template>
