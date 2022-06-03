@@ -23,6 +23,7 @@ const { state } = useApp();
 const { getTxStatus } = useGateway();
 
 // refs
+const showRaw = ref(false);
 const receipt = ref<null | ITransactionReceipt>(await getTxStatus(props.hash));
 
 // computeds
@@ -35,10 +36,86 @@ onErrorCaptured((error) => {
 </script>
 
 <template>
-	<div class="flex flex-col gap-6">
-		<a :href="`https://goerli.voyager.online/tx/${props.hash}`" rel="nofollow noopener" target="_blank" class="flex gap-1 items-center group">
-			<p class="flex items-center text-xs">View in <span class="group-hover:underline ml-1.5">goerli.voyager.online</span></p>
-		</a>
-		<pre class="wsc-text-default">{{ receipt }}</pre>
+	<div class="h-full flex flex-col">
+		<!-- form -->
+		<p class="px-2 mb-4">[Todo: tx hash input]</p>
+
+		<div class="px-2 flex justify-between items-center">
+			<!-- actions -->
+			<div class="flex gap-4">
+				<button @click="showRaw = false">
+					<p class="opacity-50" :class="{ underline: !showRaw }">Parsed</p>
+				</button>
+				<button @click="showRaw = true">
+					<p class="opacity-50" :class="{ underline: showRaw }">Raw</p>
+				</button>
+			</div>
+
+			<!-- voyager link -->
+			<a
+				:href="`https://goerli.voyager.online/tx/${props.hash}`"
+				rel="nofollow noopener"
+				target="_blank"
+				class="flex gap-1 items-center group opacity-50"
+			>
+				<p class="flex items-center text-xs">open in <span class="group-hover:underline ml-1.5">goerli.voyager.online</span></p>
+			</a>
+		</div>
+
+		<!-- raw -->
+		<div v-if="showRaw" class="h-max flex flex-col gap-2 overflow-y-scroll border-1 border-gray-600 border-opacity-50 py-2 px-3 rounded-lg my-2">
+			<pre>{{ receipt }}</pre>
+		</div>
+
+		<!-- formatted -->
+		<div v-else class="flex flex-col gap-2 h-90 overflow-y-scroll border-1 border-gray-600 border-opacity-50 py-2 px-3 rounded-lg my-2">
+			<div v-for="(key, kIndex) in Object.keys(receipt)" :key="`${kIndex}-${key}`" class="wsc-text-default">
+				<pre v-if="showRaw">{{ key }} = {{ receipt[key] }}</pre>
+				<div v-else class="flex flex-col gap-1">
+					<!-- parsed status -->
+					<div v-if="key === 'status'" class="key-value">
+						<p class="key">{{ key }}:</p>
+						<div class="value">
+							<p>{{ receipt[key] }}</p>
+							<Pulse v-if="receipt[key] === 'ACCEPTED_ON_L1'" />
+							<Pulse v-if="receipt[key] !== 'ACCEPTED_ON_L1'" variant="warning" />
+						</div>
+					</div>
+
+					<!-- l2_to_l1_messages -->
+					<div v-else-if="key === 'l2_to_l1_messages'" class="key-value">
+						<p class="key">{{ key }}:</p>
+						<div class="value">
+							<p v-if="!receipt.l2_to_l1_messages.length">{{ receipt[key] }}</p>
+							<div v-for="(msg, mIndex) in receipt.l2_to_l1_messages" v-else :key="`${mIndex}-${msg}`" class="flex flex-col gap-1">
+								<p>{{ receipt.l2_to_l1_messages[mIndex].from_address }}</p>
+								<p>{{ receipt.l2_to_l1_messages[mIndex].to_address }}</p>
+								<p>{{ receipt.l2_to_l1_messages[mIndex].payload }}</p>
+							</div>
+						</div>
+					</div>
+
+					<!-- fallback -->
+					<!-- <div v-else class="key-value">
+						<p class="key">{{ key }}:</p>
+						<div class="value">
+							<p>{{ receipt[key] }}</p>
+						</div>
+					</div> -->
+				</div>
+			</div>
+		</div>
 	</div>
 </template>
+
+<style scoped lang="scss">
+.key-value {
+	@apply flex gap-2 items-center;
+	.key {
+		@apply wsc-text-gradient-r;
+	}
+	.value {
+		@apply flex gap-2 items-center flex-grow;
+	}
+}
+</style>

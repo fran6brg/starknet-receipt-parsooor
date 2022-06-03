@@ -17,7 +17,7 @@ onMounted(async () => {
 <template>
 	<main class="h-full flex flex-col wsc-text-default">
 		<Header />
-		<div class="h-full transition-all duration-300 ease-in-out min-w-xs">
+		<div class="h-full transition-all duration-300 ease-in-out min-w-xs overflow-y-hidden">
 			<router-view />
 		</div>
 		<Footer class="fixed bottom-0 w-full" />
