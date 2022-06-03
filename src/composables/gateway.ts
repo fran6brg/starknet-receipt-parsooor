@@ -16,6 +16,9 @@ const isFetching = ref(false);
 export const useGateway = () => {
 	const getTxStatus = async (transactionHash: string): Promise<null | ITransactionReceipt> => {
 		try {
+			// error check
+			if (!transactionHash) return null;
+
 			// set state
 			isFetching.value = true;
 			console.log("transactionHash", { transactionHash });

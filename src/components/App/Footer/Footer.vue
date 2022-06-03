@@ -4,7 +4,7 @@ import { Icon } from "@iconify/vue";
 </script>
 
 <template>
-	<footer class="fixed bottom-0 w-full bg-transparent pt-2 pb-3 px-8 flex justify-between text-[#28286e]">
+	<footer class="fixed bottom-0 w-full bg-transparent pt-2 pb-3 px-8 flex justify-between wsc-text-starknet-blue">
 		<!-- version -->
 		<div class="flex items-center gap-2 py-2 opacity-30 hover:opacity-100">
 			<Icon icon="carbon:laptop" class="h-3 w-3" />

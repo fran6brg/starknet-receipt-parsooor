@@ -2,6 +2,7 @@
 import { useApp, useGateway } from "~/composables";
 import { ITransactionReceipt } from "~/interfaces";
 import L2toL1message from "../App/Receipt/L2toL1message.vue";
+import StarknetLogo from "../Logos/StarknetLogo.vue";
 
 /**
  * props
@@ -38,17 +39,14 @@ onErrorCaptured((error) => {
 
 <template>
 	<div class="h-full flex flex-col">
-		<!-- form -->
-		<p class="px-2 mb-4">[Todo: tx hash input]</p>
-
 		<div class="px-2 flex justify-between items-center">
 			<!-- actions -->
 			<div class="flex gap-4">
 				<button @click="showRaw = false">
-					<p class="opacity-50" :class="{ underline: !showRaw }">Parsed</p>
+					<p class="opacity-50" :class="{ 'underline opacity-100': !showRaw }">Parsed</p>
 				</button>
 				<button @click="showRaw = true">
-					<p class="opacity-50" :class="{ underline: showRaw }">Raw</p>
+					<p class="opacity-50" :class="{ 'underline opacity-100': showRaw }">Raw</p>
 				</button>
 			</div>
 
@@ -59,7 +57,9 @@ onErrorCaptured((error) => {
 				target="_blank"
 				class="flex gap-1 items-center group opacity-50"
 			>
-				<p class="flex items-center text-xs">open in <span class="group-hover:underline ml-1.5">goerli.voyager.online</span></p>
+				<p class="flex items-center text-xs truncate">
+					open in <span class="group-hover:underline mx-1.5">goerli.voyager.online</span> <StarknetLogo class="w-4 h-4" />
+				</p>
 			</a>
 		</div>
 
@@ -73,7 +73,15 @@ onErrorCaptured((error) => {
 			<div v-for="(key, kIndex) in Object.keys(receipt)" :key="`${kIndex}-${key}`" class="wsc-text-default">
 				<pre v-if="showRaw">{{ key }} = {{ receipt[key] }}</pre>
 				<div v-else class="flex flex-col gap-1">
-					<!-- parsed status -->
+					<!-- hash -->
+					<div v-if="key === 'transaction_hash'" class="key-value">
+						<p class="key">{{ key }}:</p>
+						<div class="value">
+							<p>{{ receipt[key] }}</p>
+						</div>
+					</div>
+
+					<!-- status -->
 					<div v-if="key === 'status'" class="key-value">
 						<p class="key">{{ key }}:</p>
 						<div class="value">
@@ -94,6 +102,14 @@ onErrorCaptured((error) => {
 								:message="msg"
 								class="flex flex-col gap-1"
 							/>
+						</div>
+					</div>
+
+					<!-- error -->
+					<div v-else-if="key === 'transaction_failure_reason'" class="key-value">
+						<p class="key">{{ key }}:</p>
+						<div class="value">
+							<p v-if="receipt.transaction_failure_reason.error_message">{{ receipt.transaction_failure_reason.error_message }}</p>
 						</div>
 					</div>
 

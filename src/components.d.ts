@@ -5,6 +5,7 @@
 declare module 'vue' {
   export interface GlobalComponents {
     Footer: typeof import('./components/App/Footer/Footer.vue')['default']
+    HashInput: typeof import('./components/System/HashInput.vue')['default']
     Header: typeof import('./components/App/Header/Header.vue')['default']
     L2toL1message: typeof import('./components/App/Receipt/L2toL1message.vue')['default']
     Logo: typeof import('./components/System/Logo.vue')['default']
@@ -13,6 +14,7 @@ declare module 'vue' {
     Pulse: typeof import('./components/System/Pulse.vue')['default']
     README: typeof import('./components/README.md')['default']
     Receipt: typeof import('./components/Receipt/Receipt.vue')['default']
+    StarknetLogo: typeof import('./components/Logos/StarknetLogo.vue')['default']
     'Uil:github': typeof import('~icons/uil/github')['default']
     'Uil:twitter': typeof import('~icons/uil/twitter')['default']
   }

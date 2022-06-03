@@ -20,10 +20,10 @@ onMounted(() => (isIPFS.value = window.location.host.includes("fran6.eth")));
 	>
 		<div class="flex items-baseline">
 			<router-link to="/goerli/insert-your-transaction-hash-here">
-				<p class="font-ptmono"><span class="text-[#f6633c]">starknet-receipt-parsooor</span></p>
+				<p class="font-ptmono"><span class="wsc-text-starknet-orange">starknet-receipt-parsooor</span></p>
 			</router-link>
 			<a :href="toFran6" rel="nofollow noopener" target="_blank">
-				<p class="text-xs font-ptmono font-bold opacity-30">
+				<p class="text-xs font-ptmono font-bold wsc-text-default opacity-30">
 					.<span class="hover:underline">{{ fran6 }}</span>
 				</p>
 			</a>
