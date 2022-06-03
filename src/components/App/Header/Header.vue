@@ -6,11 +6,12 @@
 // imports
 // refs
 // computeds
-const isIPFS = computed(() => window.location.host.includes("fran6.eth"));
+const isIPFS = ref(false);
 const fran6 = computed(() => (isIPFS.value ? "fran6.eth" : "fran6.xyz"));
 const toFran6 = computed(() => (isIPFS.value ? "https://fran6.eth.limo" : "https://fran6.xyz"));
-
 // watchers
+// hooks
+onMounted(() => (isIPFS.value = window.location.host.includes("fran6.eth")));
 </script>
 
 <template>
