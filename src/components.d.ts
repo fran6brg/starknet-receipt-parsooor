@@ -20,6 +20,7 @@ declare module 'vue' {
     README: typeof import('./components/README.md')['default']
     Receipt: typeof import('./components/Receipt/Receipt.vue')['default']
     ReceiptAddress: typeof import('./components/Receipt/Fields/ReceiptAddress.vue')['default']
+    ReceiptParsed: typeof import('./components/Receipt/ReceiptParsed.vue')['default']
     StarknetLogo: typeof import('./components/Logos/StarknetLogo.vue')['default']
     'Uil:github': typeof import('~icons/uil/github')['default']
     'Uil:twitter': typeof import('~icons/uil/twitter')['default']

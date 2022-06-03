@@ -120,13 +120,13 @@ watch(
 			<component
 				:is="type"
 				:value="localValue"
-				class="test w-full text-left bg-transparent focus:outline-none overflow-x-scroll p-2 pr-10 border-b-1 wsc-border-default focus:wsc-border-starknet-orange border-opacity-50 focus:border-opacity-100 text-xs text-gray-300 no-underline wsc-transition-all group-hover:wsc-border-starknet-orange"
+				class="test w-full text-left bg-transparent focus:outline-none overflow-x-scroll py-1 px-2 pr-10 border-b-1 wsc-border-default focus:wsc-border-starknet-orange border-opacity-50 focus:border-opacity-100 text-xs text-gray-300 no-underline wsc-transition-all group-hover:wsc-border-starknet-orange"
 				spellcheck="false"
 				:placeholder="placeholder"
 				:type="type"
 				@input="handleInput"
 			/>
-			<div class="-ml-8">
+			<div class="-ml-7">
 				<Icon v-if="localValue && (localError || error)" icon="carbon:warning-hex" class="wsc-text-error" />
 				<Icon v-else-if="isValidatingInput" icon="carbon:hourglass" class="wsc-text-from" />
 				<Icon v-else-if="localValue" icon="carbon:checkmark" class="wsc-text-success" />

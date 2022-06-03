@@ -33,6 +33,7 @@ const { state } = useApp();
 // refs
 const hash = ref(props.hashURL === "insert-your-transaction-hash-here" ? "" : props.hashURL);
 const hashError = ref("");
+const router = useRouter();
 // computeds
 // watchers
 // hooks
@@ -47,6 +48,7 @@ const handleHashValueChange = ({ value, error }: { value: string; error: string 
 	else {
 		hashError.value = "";
 		hash.value = value;
+		router.push(`/goerli/${hash.value}`);
 	}
 };
 </script>

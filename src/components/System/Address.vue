@@ -1,9 +1,8 @@
 <template>
-	<div class="min-w-16 font-ptmono" :class="{ 'hover:cursor-pointer': copy }" @click="copyAddress(address)">
-		<p v-if="copied">Copied!</p>
-		<p v-else-if="ens">{{ ens }}</p>
-		<p v-else-if="formatAddress(address).startsWith('0x')" class="wsc-text-from">{{ formatAddress(address) }}</p>
-		<p v-else class="wsc-text-error">Invalid address</p>
+	<div class="min-w-16 font-ptmono">
+		<p v-if="ens">{{ ens }}</p>
+		<p v-else-if="formatAddress(address).startsWith('0x')">{{ formatAddress(address) }}</p>
+		<p v-else class="wsc-text-warning">Invalid address</p>
 	</div>
 </template>
 
@@ -12,7 +11,7 @@
  * props
  */
 
-const props = defineProps({
+defineProps({
 	address: {
 		type: String as () => string,
 		required: false,
@@ -35,7 +34,6 @@ const props = defineProps({
  */
 
 // imports
-const { copy: runCopy, copied } = useClipboard({ source: props.address });
 // refs
 // computeds
 // watchers
@@ -44,13 +42,10 @@ const { copy: runCopy, copied } = useClipboard({ source: props.address });
  * methods
  */
 
-const copyAddress = (address: string): void => {
-	if (props.copy) runCopy(address);
-};
-
 const formatAddress = (address: string): string => {
 	if (!address) return "Invalid address";
 	if (!address.startsWith("0x")) return "Invalid address";
+	if (address.length < 60) return "Invalid address";
 	return `${address.substring(0, 6).toLowerCase()}...${address.substr(-4).toLowerCase()}`;
 };
 </script>
