@@ -26,7 +26,7 @@ const { getTxStatus } = useGateway();
 
 // refs
 const showRaw = ref(false);
-const receipt = ref<null | ITransactionReceipt>(await getTxStatus(props.hash));
+const receipt = ref<null | ITransactionReceipt>(await getTxStatus(props.hash.toLowerCase()));
 
 // computeds
 // watchers
@@ -38,7 +38,7 @@ onErrorCaptured((error) => {
 </script>
 
 <template>
-	<div class="h-full flex flex-col">
+	<div v-if="receipt" class="h-full flex flex-col">
 		<div class="px-2 flex justify-between items-center">
 			<!-- actions -->
 			<div class="flex gap-4">
@@ -109,7 +109,10 @@ onErrorCaptured((error) => {
 					<div v-else-if="key === 'transaction_failure_reason'" class="key-value">
 						<p class="key">{{ key }}:</p>
 						<div class="value">
-							<p v-if="receipt.transaction_failure_reason.error_message">{{ receipt.transaction_failure_reason.error_message }}</p>
+							<p
+								v-if="receipt.transaction_failure_reason.error_message"
+								v-html="receipt.transaction_failure_reason.error_message.replace(/(?:\r\n|\r|\n)/g, '<br />')"
+							/>
 						</div>
 					</div>
 

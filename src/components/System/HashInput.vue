@@ -48,10 +48,12 @@ const emit = defineEmits(["update:value"]);
  */
 
 // refs
-const timeout = ref<null | NodeJS.Timeout>(null);
 const localValue = ref(props.value);
+// console.log("localValue", localValue.value);
 const localError = ref<string>("");
 const isValidatingInput = ref<boolean>(false);
+// computeds
+// hooks
 
 /**
  * methods
@@ -65,25 +67,40 @@ const handleInput = (e: Event & { target: HTMLInputElement }): void => {
 	localValue.value = input;
 	isValidatingInput.value = true;
 
-	// if a timeout is still in process, clear it before reassigning a new one
-	if (timeout.value) clearTimeout(timeout.value);
-
-	// set new timeout
-	timeout.value = setTimeout(async (): Promise<void> => {
-		// handle empty string
-		if (!input) localError.value = "";
-		// handle NullAddress
-		else if (![65, 64].includes(input.length)) localError.value = "Please enter a valid hash -> format 0x[chars hex]";
-		// emit input update
-		else {
-			localError.value = "";
-			emit("update:value", localValue.value);
-		}
-
-		// set state
-		isValidatingInput.value = false;
-	}, 600);
+	// -
+	validateInput(input);
 };
+
+const validateInput = (input: string) => {
+	// console.log("validateInput", input);
+	// handle empty string
+	if (!input) localError.value = "";
+	// handle NullAddress
+	else if (![65, 64, 63].includes(input.length))
+		emit("update:value", { value: localValue.value, error: "Please enter a valid hash -> format 0x[chars hex]" });
+	// emit input update
+	else {
+		localError.value = "";
+		// console.log("update:value", localValue.value);
+		emit("update:value", { value: localValue.value, error: "" });
+	}
+
+	// set state
+	isValidatingInput.value = false;
+};
+
+// watchers
+watch(
+	() => props.value,
+	(current: string) => {
+		// console.warn({ current });
+		if (current) {
+			localValue.value = current;
+			validateInput(current);
+		} else localValue.value = "";
+	},
+	{ immediate: true },
+);
 </script>
 
 <template>

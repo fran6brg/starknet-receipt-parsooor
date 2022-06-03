@@ -18,10 +18,11 @@ export const useGateway = () => {
 		try {
 			// error check
 			if (!transactionHash) return null;
+			if (!transactionHash.startsWith("0x")) return null;
 
 			// set state
 			isFetching.value = true;
-			console.log("transactionHash", { transactionHash });
+			console.warn("useGateway/getTxStatus/transactionHash", { transactionHash });
 
 			// build endpoint
 			const endpoint = `${root}/get_transaction_receipt?transactionHash=${transactionHash}`;
@@ -31,7 +32,7 @@ export const useGateway = () => {
 
 			// parse response
 			const data: ITransactionReceipt = await response.json();
-			console.log("status", { data });
+			// console.log("status", { data });
 
 			// ret
 			return data;
