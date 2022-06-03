@@ -1,7 +1,20 @@
+<script setup lang="ts">
+import * as packages from "../../../../package.json";
+import { Icon } from "@iconify/vue";
+</script>
+
 <template>
-	<footer class="fixed bottom-0 w-full bg-transparent pt-2 pb-3 px-8 flex justify-end wsc-text-default">
-		<div class="flex items-center gap-2 group py-2 text-[#28286e]">
+	<footer class="fixed bottom-0 w-full bg-transparent pt-2 pb-3 px-8 flex justify-between wsc-text-default text-[#28286e]">
+		<!-- version -->
+		<div class="flex items-center gap-2 py-2 opacity-30 hover:opacity-100">
+			<Icon icon="carbon:laptop" class="h-3 w-3" />
+			<p class="text-xs font-ptmono font-bold flex hover:opacity-100">UI v{{ packages.version }}</p>
+		</div>
+
+		<!-- links -->
+		<div class="flex items-center gap-2 py-2">
 			<div class="flex items-center gap-2">
+				<!-- todo -->
 				<a href="https://github.com/fran6brg" rel="nofollow noopener" target="_blank" class="flex items-center">
 					<uil:github class="w-4 h-4" />
 				</a>

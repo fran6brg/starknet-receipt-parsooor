@@ -6,7 +6,7 @@ import { PropType } from "vue";
  * props
  */
 
-const props = defineProps({
+defineProps({
 	message: {
 		type: Object as PropType<IReceiptL2ToL1Messages>,
 		required: true,
@@ -26,11 +26,9 @@ const props = defineProps({
 </script>
 
 <template>
-	<div v-for="(msg, mIndex) in receipt.l2_to_l1_messages" :key="`${mIndex}-${msg}`" class="flex flex-col gap-1">
-		<div>
-			<p>{{ receipt.l2_to_l1_messages[mIndex].from_address }}</p>
-			<p>{{ receipt.l2_to_l1_messages[mIndex].to_address }}</p>
-			<p>{{ receipt.l2_to_l1_messages[mIndex].payload }}</p>
-		</div>
+	<div v-if="message" class="flex p-2 border-1 wsc-border-from rounded-lg">
+		<p>{{ message.from_address }}</p>
+		<p>{{ message.to_address }}</p>
+		<p>{{ message.payload }}</p>
 	</div>
 </template>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { useApp, useGateway } from "~/composables";
 import { ITransactionReceipt } from "~/interfaces";
+import L2toL1message from "../App/Receipt/L2toL1message.vue";
 
 /**
  * props
@@ -87,11 +88,12 @@ onErrorCaptured((error) => {
 						<p class="key">{{ key }}:</p>
 						<div class="value">
 							<p v-if="!receipt.l2_to_l1_messages.length">{{ receipt[key] }}</p>
-							<div v-for="(msg, mIndex) in receipt.l2_to_l1_messages" v-else :key="`${mIndex}-${msg}`" class="flex flex-col gap-1">
-								<p>{{ receipt.l2_to_l1_messages[mIndex].from_address }}</p>
-								<p>{{ receipt.l2_to_l1_messages[mIndex].to_address }}</p>
-								<p>{{ receipt.l2_to_l1_messages[mIndex].payload }}</p>
-							</div>
+							<L2toL1message
+								v-for="(msg, mIndex) in receipt.l2_to_l1_messages"
+								:key="`${mIndex}-${msg}`"
+								:message="msg"
+								class="flex flex-col gap-1"
+							/>
 						</div>
 					</div>
 
