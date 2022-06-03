@@ -4,16 +4,22 @@
 
 declare module 'vue' {
   export interface GlobalComponents {
+    Address: typeof import('./components/System/Address.vue')['default']
+    AddressDesigned: typeof import('./components/System/AddressDesigned.vue')['default']
     Footer: typeof import('./components/App/Footer/Footer.vue')['default']
     HashInput: typeof import('./components/System/HashInput.vue')['default']
     Header: typeof import('./components/App/Header/Header.vue')['default']
+    JazzIcon: typeof import('./components/System/JazzIcon.vue')['default']
+    JazzIconWrapper: typeof import('./components/System/JazzIconWrapper.vue')['default']
     L2toL1message: typeof import('./components/App/Receipt/L2toL1message.vue')['default']
+    LinkToVoyager: typeof import('./components/System/LinkToVoyager.vue')['default']
     Logo: typeof import('./components/System/Logo.vue')['default']
     Page: typeof import('./components/App/Layout/Page.vue')['default']
     PageContent: typeof import('./components/App/Layout/PageContent.vue')['default']
     Pulse: typeof import('./components/System/Pulse.vue')['default']
     README: typeof import('./components/README.md')['default']
     Receipt: typeof import('./components/Receipt/Receipt.vue')['default']
+    ReceiptAddress: typeof import('./components/Receipt/Fields/ReceiptAddress.vue')['default']
     StarknetLogo: typeof import('./components/Logos/StarknetLogo.vue')['default']
     'Uil:github': typeof import('~icons/uil/github')['default']
     'Uil:twitter': typeof import('~icons/uil/twitter')['default']

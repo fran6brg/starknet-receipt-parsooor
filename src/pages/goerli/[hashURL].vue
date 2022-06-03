@@ -43,7 +43,6 @@ onErrorCaptured((error) => console.warn("pages/hashURL", error));
  */
 
 const handleHashValueChange = ({ value, error }: { value: string; error: string }): void => {
-	// console.log("handleHashValueChange", { value });
 	if (error) hashError.value = error;
 	else {
 		hashError.value = "";
@@ -62,13 +61,7 @@ const handleHashValueChange = ({ value, error }: { value: string; error: string 
 		</div>
 
 		<!-- form -->
-		<HashInput
-			placeholder="Transaction hash 0x[hex]"
-			:value="hash"
-			:error="hashError"
-			class="w-140"
-			@update:value="handleHashValueChange($event)"
-		/>
+		<HashInput placeholder="right there my fren" :value="hash" :error="hashError" class="w-140" @update:value="handleHashValueChange($event)" />
 
 		<!-- receipt -->
 		<PageContent>
@@ -77,9 +70,9 @@ const handleHashValueChange = ({ value, error }: { value: string; error: string 
 				<Receipt :hash="hash" />
 
 				<!-- loading state -->
-				<template #fallback>Loading receipt...</template>
+				<template #fallback>Fetching receipt...</template>
 			</Suspense>
-			<p v-else-if="!hash">Enter a transaction hash ⬆️</p>
+			<p v-else-if="!hash">paste your hash (0x42...42) in the form ⬆️</p>
 		</PageContent>
 	</Page>
 </template>

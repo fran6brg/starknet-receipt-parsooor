@@ -43,10 +43,10 @@ onErrorCaptured((error) => {
 			<!-- actions -->
 			<div class="flex gap-4">
 				<button @click="showRaw = false">
-					<p class="opacity-50" :class="{ 'underline opacity-100': !showRaw }">Parsed</p>
+					<p class="opacity-50" :class="{ 'underline opacity-100': !showRaw }">PaRsEd</p>
 				</button>
 				<button @click="showRaw = true">
-					<p class="opacity-50" :class="{ 'underline opacity-100': showRaw }">Raw</p>
+					<p class="opacity-50" :class="{ 'underline opacity-100': showRaw }">raw</p>
 				</button>
 			</div>
 
@@ -69,7 +69,7 @@ onErrorCaptured((error) => {
 		</div>
 
 		<!-- formatted -->
-		<div v-else class="flex flex-col gap-2 h-90 overflow-y-scroll border-1 border-gray-600 border-opacity-50 py-2 px-3 rounded-lg my-2">
+		<div v-else class="h-max flex flex-col gap-2 overflow-y-scroll border-1 border-gray-600 border-opacity-50 py-2 px-3 rounded-lg my-2">
 			<div v-for="(key, kIndex) in Object.keys(receipt)" :key="`${kIndex}-${key}`" class="wsc-text-default">
 				<pre v-if="showRaw">{{ key }} = {{ receipt[key] }}</pre>
 				<div v-else class="flex flex-col gap-1">
@@ -77,7 +77,7 @@ onErrorCaptured((error) => {
 					<div v-if="key === 'transaction_hash'" class="key-value">
 						<p class="key">{{ key }}:</p>
 						<div class="value">
-							<p>{{ receipt[key] }}</p>
+							<AddressDesigned type="tx" :address="receipt[key]" />
 						</div>
 					</div>
 

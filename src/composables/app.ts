@@ -6,6 +6,7 @@ interface IAppState {
 	env: string;
 	loading: boolean;
 	initialized: boolean;
+	network: "goerli" | "mainnet";
 	error?: Error;
 }
 
@@ -18,6 +19,7 @@ const state = reactive<IAppState>({
 	env: String(import.meta.env.VITE_ENV),
 	loading: false,
 	initialized: false,
+	network: "goerli",
 });
 
 export const useApp = () => {
