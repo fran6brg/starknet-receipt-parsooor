@@ -43,7 +43,7 @@ const { copy, copied } = useClipboard({ source: props.address });
 
 <template>
 	<div
-		class="flex items-center gap-2.5 wsc-bg-default bg-opacity-70 py-1 px-2 rounded-lg border-1 border-dotted border-transparent hover:wsc-border-from"
+		class="flex items-center gap-2.5 wsc-bg-default bg-opacity-70 py-1 px-2 rounded-lg border-1 border-dotted border-transparent hover:wsc-border-from w-max"
 		:class="{ 'text-xs': size === 'xs', 'text-sm': size === 'sm', 'text-md': size === 'md' }"
 	>
 		<template v-if="address">

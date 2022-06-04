@@ -16,8 +16,25 @@ import "virtual:windi-devtools";
 
 const routes = setupLayouts(generatedRoutes);
 
+/**
+ * vue-tippy
+ */
+
+import VueTippy from "vue-tippy";
+import "tippy.js/dist/tippy.css";
+
 // https://github.com/antfu/vite-ssg
 export const createApp = ViteSSG(App, { routes }, (ctx) => {
 	// install all modules under `modules/`
 	Object.values(import.meta.globEager("./modules/*.ts")).map((i) => i.install?.(ctx));
+
+	/**
+	 * vue-tippy
+	 */
+	// https://kabbouchi.github.io/vue-tippy/4.0/getting-started.html
+	const { app } = ctx;
+	app.use(VueTippy, {
+		defaultProps: { delay: [400, null] },
+		directive: "tippy", // => v-tippy
+	});
 });

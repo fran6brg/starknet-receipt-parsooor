@@ -34,7 +34,7 @@ onErrorCaptured((error) => {
 </script>
 
 <template>
-	<div class="flex flex-col items-end w-full bg-gradient-to-tr from-gray-800/20 via-blue-400/10 to-emerald-400/10 rounded-xl">
+	<div class="flex flex-col items-end w-full bg-gradient-to-tr from-gray-800/20 via-blue-400/10 to-cyan-400/30 rounded-xl">
 		<button
 			class="flex justify-between items-center w-full py-4 px-8 cursor-pointer"
 			:class="{ 'cursor-not-allowed': !error }"

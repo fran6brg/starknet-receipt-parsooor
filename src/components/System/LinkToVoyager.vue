@@ -12,7 +12,7 @@ defineProps({
 		default: "tx",
 		validator: (value: string) => ["contract", "block", "tx"].includes(value),
 	},
-	value: {
+	address: {
 		type: String,
 		required: false,
 		default: null,
@@ -35,7 +35,7 @@ const { state } = useApp();
 </script>
 
 <template>
-	<a :href="`https://${state.network}.voyager.online/${type}/${value}`" target="_blank" rel="noopener">
+	<a :href="`https://${state.network}.voyager.online/${type}/${address}`" target="_blank" rel="noopener">
 		<slot />
 	</a>
 </template>

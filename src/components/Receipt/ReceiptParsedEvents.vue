@@ -34,14 +34,14 @@ onErrorCaptured((error) => {
 </script>
 
 <template>
-	<div class="flex flex-col items-end w-full bg-gradient-to-tr from-gray-800/20 via-blue-400/10 to-emerald-400/10 rounded-xl">
+	<div class="flex flex-col items-end w-full bg-gradient-to-tr from-gray-800/20 via-blue-400/10 to-cyan-400/30 rounded-xl">
 		<button
 			class="flex justify-between items-center w-full py-4 px-8 cursor-pointer"
 			:class="{ 'cursor-not-allowed': !events.length }"
 			:disabled="!events.length"
 			@click="isCollapsed = !isCollapsed"
 		>
-			<p v-if="events.length" class="wsc-text-starknet-orange">{{ events.length }} event{{ events.length ? "s" : "" }}</p>
+			<p v-if="events.length" class="wsc-text-starknet-orange">{{ events.length }} event{{ events.length > 1 ? "s" : "" }}</p>
 			<p v-else class="wsc-text-default">No event</p>
 		</button>
 		<Collapse v-if="events.length" :is-collapsed="isCollapsed">

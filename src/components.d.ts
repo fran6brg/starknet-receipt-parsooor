@@ -10,6 +10,7 @@ declare module 'vue' {
     Footer: typeof import('./components/App/Footer/Footer.vue')['default']
     HashInput: typeof import('./components/System/HashInput.vue')['default']
     Header: typeof import('./components/App/Header/Header.vue')['default']
+    Information: typeof import('./components/System/Information.vue')['default']
     JazzIcon: typeof import('./components/System/JazzIcon.vue')['default']
     JazzIconWrapper: typeof import('./components/System/JazzIconWrapper.vue')['default']
     L2toL1message: typeof import('./components/App/Receipt/L2toL1message.vue')['default']

@@ -24,6 +24,9 @@ defineProps({
 const { state } = useApp();
 
 // refs
+const statusInfo = ref(
+	"ACCEPTED_ON_L1: Your transaction has been settled on L1.<br /><br />REJECTED: Your transaction is is invalid. Check the error section.<br /><br />RECEIVED: Your transaction has been received on the L2 network and is being processed.",
+);
 // computeds
 // watchers
 // hooks
@@ -36,7 +39,7 @@ onErrorCaptured((error) => {
 <template>
 	<div class="flex flex-col gap-6">
 		<!-- block -->
-		<div class="flex gap-6">
+		<div class="flex <md:flex-col gap-6">
 			<div class="flex flex-col gap-1">
 				<p class="wsc-text-default">block_hash</p>
 				<AddressDesigned v-if="receipt.block_hash" :address="receipt.block_hash" type="block" />
@@ -49,6 +52,12 @@ onErrorCaptured((error) => {
 					<p v-else>none</p>
 				</div>
 			</div>
+			<div class="flex flex-col gap-1">
+				<p class="wsc-text-default">timestamp</p>
+				<div class="h-full flex items-center">
+					<p class="opacity-50">soon</p>
+				</div>
+			</div>
 		</div>
 
 		<!-- tx -->
@@ -56,17 +65,25 @@ onErrorCaptured((error) => {
 			class="flex flex-col gap-4 border-1 p-3 rounded-xl"
 			:class="{
 				'wsc-border-success': receipt.status === 'ACCEPTED_ON_L1',
-				'wsc-border-error border-opacity-50': receipt.status !== 'ACCEPTED_ON_L1',
+				'wsc-border-default': receipt.status !== 'RECEIVED',
+				'wsc-border-error border-opacity-50': receipt.status === 'REJECTED',
 			}"
 		>
 			<!-- general  -->
-			<div class="flex gap-6">
+			<div class="flex <md:flex-col gap-6">
 				<div class="flex flex-col gap-1">
-					<p class="wsc-text-default">status</p>
+					<div class="flex gap-1.5">
+						<p class="wsc-text-default">status</p>
+						<Information :content="statusInfo" />
+					</div>
 					<div class="h-full flex items-center gap-2">
-						<!-- <Pulse v-if="receipt.status === 'ACCEPTED_ON_L1'" />
-						<Pulse v-else variant="warning" /> -->
-						<p :class="{ 'wsc-text-success': receipt.status === 'ACCEPTED_ON_L1', 'wsc-text-error': receipt.status === 'REJECTED' }">
+						<p
+							:class="{
+								'wsc-text-success': receipt.status === 'ACCEPTED_ON_L1',
+								'wsc-text-default': receipt.status === 'RECEIVED',
+								'wsc-text-error': receipt.status === 'REJECTED',
+							}"
+						>
 							{{ receipt.status }}
 						</p>
 					</div>

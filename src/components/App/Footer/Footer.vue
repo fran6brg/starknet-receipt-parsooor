@@ -37,8 +37,8 @@ import { Icon } from "@iconify/vue";
 				</a>
 			</div>
 			<p class="font-ptmono font-bold opacity-50">/</p>
-			<a href="https://starknet-receipt-parsooor.fran6.eth.limo" rel="nofollow noopener" target="_blank">
-				<p class="font-ptmono font-bold"><span class="hover:underline">IPFS hosted</span></p>
+			<a href="https://starknet-receipt-parsooor.fran6.eth.link" rel="nofollow noopener" target="_blank">
+				<p class="font-ptmono font-bold"><span class="hover:underline">IPFS</span></p>
 			</a>
 		</div>
 	</footer>

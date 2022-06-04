@@ -16,7 +16,7 @@ onMounted(() => (isIPFS.value = window.location.host.includes("fran6.eth")));
 
 <template>
 	<header
-		class="fixed w-full flex items-center justify-between px-8 py-3 transition-opacity duration-300 ease-in-out backdrop-filter backdrop-blur-lg z-30"
+		class="fixed w-full flex items-baseline justify-between px-8 py-3 transition-opacity duration-300 ease-in-out backdrop-filter backdrop-blur-lg z-30"
 	>
 		<div class="flex items-baseline">
 			<router-link to="/goerli/insert-your-transaction-hash-here">
@@ -27,6 +27,9 @@ onMounted(() => (isIPFS.value = window.location.host.includes("fran6.eth")));
 					.<span class="hover:underline">{{ fran6 }}</span>
 				</p>
 			</a>
+		</div>
+		<div class="flex">
+			<p class="font-ptmono text-xs opacity-30 text-right">Check pending txs by connecting L2 wallet (soon)</p>
 		</div>
 	</header>
 </template>
