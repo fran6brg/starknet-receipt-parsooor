@@ -1,3 +1,7 @@
+export interface IReceiptTransactionFailureReason {
+	code: string;
+	error_message: string;
+}
 export interface IReceiptL2ToL1Messages {
 	from_address: string;
 	to_address: string;
@@ -27,12 +31,13 @@ export interface IReceiptExecutionResources {
 
 export interface ITransactionReceipt {
 	status: string;
-	block_hash: string;
-	block_number: number;
-	transaction_index: number;
+	block_hash?: string;
+	block_number?: number;
+	transaction_index?: number;
 	transaction_hash: string;
+	transaction_failure_reason?: IReceiptTransactionFailureReason;
 	l2_to_l1_messages: IReceiptL2ToL1Messages[];
 	events: IReceiptEvent[];
-	execution_resources: IReceiptExecutionResources;
-	actual_fee: string;
+	execution_resources?: IReceiptExecutionResources;
+	actual_fee?: string;
 }

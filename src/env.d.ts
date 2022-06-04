@@ -3,7 +3,6 @@
 interface ImportMetaEnv {
 	readonly VITE_ENV: string;
 	readonly VITE_DEBUG: string;
-	// readonly ALCHEMY_URL: string;
 }
 
 interface ImportMeta {

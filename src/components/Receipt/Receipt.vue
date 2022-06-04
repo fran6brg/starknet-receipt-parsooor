@@ -37,7 +37,7 @@ onErrorCaptured((error) => {
 
 <template>
 	<div v-if="receipt" class="h-full flex flex-col">
-		<div class="px-2 flex justify-between items-center">
+		<div class="px-2 flex justify-between items-center mb-2">
 			<!-- format selector -->
 			<div class="flex gap-4">
 				<button @click="showRaw = false">
@@ -58,11 +58,7 @@ onErrorCaptured((error) => {
 
 		<!-- formats -->
 		<div
-			class="h-max mb-20 flex flex-col gap-2 overflow-y-scroll border-1 py-2 px-3 rounded-xl my-2 wsc-bg-default bg-opacity-50"
-			:class="{
-				'wsc-border-success': receipt.transaction_status === 'ACCEPTED_ON_L1',
-				'wsc-border-default border-opacity-20': receipt.transaction_status !== 'ACCEPTED_ON_L1',
-			}"
+			class="h-max mb-20 flex flex-col gap-2 overflow-y-scroll border-1 p-4 rounded-xl wsc-bg-starknet-blue bg-opacity-80 wsc-border-default border-opacity-20"
 		>
 			<!-- raw -->
 			<pre v-if="showRaw">{{ receipt }}</pre>

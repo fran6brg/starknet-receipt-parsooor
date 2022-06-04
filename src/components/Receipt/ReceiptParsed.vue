@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useApp } from "~/composables";
 import { ITransactionReceipt } from "~/interfaces";
-import L2toL1message from "../App/Receipt/L2toL1message.vue";
 import { PropType } from "vue";
+import ReceiptParsedResources from "./ReceiptParsedResources.vue";
 
 /**
  * props
@@ -34,80 +34,75 @@ onErrorCaptured((error) => {
 </script>
 
 <template>
-	<div class="">
-		<div v-for="(key, kIndex) in Object.keys(receipt)" :key="`${kIndex}-${key}`" class="wsc-text-default">
+	<div class="flex flex-col gap-6">
+		<!-- block -->
+		<div class="flex gap-6">
 			<div class="flex flex-col gap-1">
-				<!-- block -->
-				<div v-if="key === 'block_hash'" class="key-value">
-					<p class="key">{{ key }}:</p>
-					<div class="value">
-						<AddressDesigned type="tx" :address="receipt[key]" />
-					</div>
-				</div>
-
-				<!-- tx -->
-				<div v-if="key === 'transaction_hash'" class="key-value">
-					<p class="key">{{ key }}:</p>
-					<div class="value">
-						<AddressDesigned type="tx" :address="receipt[key]" />
-					</div>
-				</div>
-
-				<!-- status -->
-				<div v-if="key === 'status'" class="key-value">
-					<p class="key">{{ key }}:</p>
-					<div class="value">
-						<p>{{ receipt[key] }}</p>
-						<Pulse v-if="receipt[key] === 'ACCEPTED_ON_L1'" />
-						<Pulse v-if="receipt[key] !== 'ACCEPTED_ON_L1'" variant="warning" />
-					</div>
-				</div>
-
-				<!-- l2_to_l1_messages -->
-				<div v-else-if="key === 'l2_to_l1_messages'" class="key-value">
-					<p class="key">{{ key }}:</p>
-					<div class="value">
-						<p v-if="!receipt.l2_to_l1_messages.length">{{ receipt[key] }}</p>
-						<L2toL1message
-							v-for="(msg, mIndex) in receipt.l2_to_l1_messages"
-							:key="`${mIndex}-${msg}`"
-							:message="msg"
-							class="flex flex-col gap-1"
-						/>
-					</div>
-				</div>
-
-				<!-- error -->
-				<div v-else-if="key === 'transaction_failure_reason'" class="key-value">
-					<p class="key">{{ key }}:</p>
-					<div class="value">
-						<p
-							v-if="receipt.transaction_failure_reason.error_message"
-							v-html="receipt.transaction_failure_reason.error_message.replace(/(?:\r\n|\r|\n)/g, '<br />')"
-						/>
-					</div>
-				</div>
-
-				<!-- fallback -->
-				<!-- <div v-else class="key-value">
-						<p class="key">{{ key }}:</p>
-						<div class="value">
-							<p>{{ receipt[key] }}</p>
-						</div>
-					</div> -->
+				<p class="wsc-text-default">block_hash</p>
+				<AddressDesigned v-if="receipt.block_hash" :address="receipt.block_hash" type="block" />
+				<p v-else>none</p>
 			</div>
+			<div class="flex flex-col gap-1">
+				<p class="wsc-text-default">block_number</p>
+				<div class="h-full flex items-center">
+					<p v-if="receipt.block_number">{{ receipt.block_number }}</p>
+					<p v-else>none</p>
+				</div>
+			</div>
+		</div>
+
+		<!-- tx -->
+		<div
+			class="flex flex-col gap-4 border-1 p-3 rounded-xl"
+			:class="{
+				'wsc-border-success': receipt.status === 'ACCEPTED_ON_L1',
+				'wsc-border-error border-opacity-50': receipt.status !== 'ACCEPTED_ON_L1',
+			}"
+		>
+			<!-- general  -->
+			<div class="flex gap-6">
+				<div class="flex flex-col gap-1">
+					<p class="wsc-text-default">status</p>
+					<div class="h-full flex items-center gap-2">
+						<!-- <Pulse v-if="receipt.status === 'ACCEPTED_ON_L1'" />
+						<Pulse v-else variant="warning" /> -->
+						<p :class="{ 'wsc-text-success': receipt.status === 'ACCEPTED_ON_L1', 'wsc-text-error': receipt.status === 'REJECTED' }">
+							{{ receipt.status }}
+						</p>
+					</div>
+				</div>
+				<div class="flex flex-col gap-1">
+					<p class="wsc-text-default">transaction_hash</p>
+					<AddressDesigned v-if="receipt.transaction_hash" type="tx" :address="receipt.transaction_hash" />
+					<p v-else>none</p>
+				</div>
+				<div class="flex flex-col gap-1">
+					<p class="wsc-text-default">transaction_index</p>
+					<div class="h-full flex items-center">
+						<p v-if="receipt.transaction_index">{{ receipt.transaction_index }}</p>
+						<p v-else>none</p>
+					</div>
+				</div>
+				<div class="flex flex-col gap-1">
+					<p class="wsc-text-default">actual_fee</p>
+					<div class="h-full flex items-center">
+						<p v-if="receipt.actual_fee">{{ receipt.actual_fee }}</p>
+						<p v-else>none</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- messages -->
+			<ReceiptParsedMessages :messages="receipt.messages" />
+
+			<!-- events -->
+			<ReceiptParsedEvents :events="receipt.events" />
+
+			<!-- resources -->
+			<ReceiptParsedResources v-if="receipt.execution_resources" :resources="receipt.execution_resources" />
+
+			<!-- errors -->
+			<ReceiptParsedError v-if="receipt.transaction_failure_reason" :error="receipt.transaction_failure_reason" />
 		</div>
 	</div>
 </template>
-
-<style scoped lang="scss">
-.key-value {
-	@apply flex gap-2 items-center;
-	.key {
-		@apply wsc-text-gradient-r;
-	}
-	.value {
-		@apply flex gap-2 items-center flex-grow;
-	}
-}
-</style>

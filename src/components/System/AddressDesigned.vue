@@ -43,18 +43,22 @@ const { copy, copied } = useClipboard({ source: props.address });
 
 <template>
 	<div
-		v-if="address"
-		class="flex items-center gap-2.5 wsc-bg-default bg-opacity-70 py-1 px-2 rounded-lg border-1 border-dotted border-transparent hover:wsc-border-from !border-opacity-40"
+		class="flex items-center gap-2.5 wsc-bg-default bg-opacity-70 py-1 px-2 rounded-lg border-1 border-dotted border-transparent hover:wsc-border-from"
 		:class="{ 'text-xs': size === 'xs', 'text-sm': size === 'sm', 'text-md': size === 'md' }"
 	>
-		<JazzIconWrapper v-if="type !== 'tx'" :address="address" :size="size" />
-		<Address :address="address" />
-		<button class="hover:wsc-text-from" @click="copy(value)">
-			<Icon v-if="copied" icon="carbon:checkmark" class="h-3 w-3" />
-			<Icon v-else icon="carbon:copy" class="h-3 w-3" />
-		</button>
-		<LinkToVoyager :type="type" :address="address" class="hover:wsc-text-from">
-			<Icon icon="ic:baseline-open-in-new" class="h-3 w-3" />
-		</LinkToVoyager>
+		<template v-if="address">
+			<JazzIconWrapper v-if="type === 'contract'" :address="address" :size="size" />
+			<Address :address="address" />
+			<button class="hover:wsc-text-from" @click="copy(value)">
+				<Icon v-if="copied" icon="carbon:checkmark" class="h-3 w-3" />
+				<Icon v-else icon="carbon:copy" class="h-3 w-3" />
+			</button>
+			<LinkToVoyager :type="type" :address="address" class="hover:wsc-text-from">
+				<Icon icon="ic:baseline-open-in-new" class="h-3 w-3" />
+			</LinkToVoyager>
+		</template>
+		<template v-else>
+			<Address :address="address" />
+		</template>
 	</div>
 </template>
