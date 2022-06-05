@@ -73,7 +73,7 @@ const handleHashValueChange = ({ value, error }: { value: string; error: string 
 				<Receipt :hash="hash" />
 
 				<!-- loading state -->
-				<template #fallback>Fetching receipt...</template>
+				<template #fallback>Fetching receipt...(sometimes you must be patient)</template>
 			</Suspense>
 			<p v-else-if="!hash">paste your hash (0x42...42) in the form ⬆️</p>
 		</PageContent>
