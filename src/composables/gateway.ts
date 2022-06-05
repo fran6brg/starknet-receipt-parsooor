@@ -1,4 +1,5 @@
 import { ITransactionReceipt } from "~/interfaces";
+import { useApp } from "~/composables";
 
 /**
  * constants
@@ -96,6 +97,13 @@ const receiptFakeResult: ITransactionReceipt = {
 const isFetching = ref(false);
 
 export const useGateway = () => {
+	// imports
+	const { state } = useApp();
+
+	/**
+	 * methods
+	 */
+
 	const getTxStatus = async (transactionHash: string): Promise<null | ITransactionReceipt> => {
 		try {
 			// error check
@@ -122,7 +130,8 @@ export const useGateway = () => {
 			// ret
 			return data;
 		} catch (error) {
-			return null;
+			console.warn("gateway/getTxStatus/error", { error });
+			state.error = new Error(JSON.stringify(error));
 		} finally {
 			// set state
 			isFetching.value = false;

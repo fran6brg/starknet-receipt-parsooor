@@ -16,7 +16,6 @@ declare module 'vue' {
     L2toL1message: typeof import('./components/App/Receipt/L2toL1message.vue')['default']
     LinkToEtherscan: typeof import('./components/System/LinkToEtherscan.vue')['default']
     LinkToVoyager: typeof import('./components/System/LinkToVoyager.vue')['default']
-    'LinkToVoyager copy': typeof import('./components/System/LinkToVoyager copy.vue')['default']
     Logo: typeof import('./components/System/Logo.vue')['default']
     Page: typeof import('./components/App/Layout/Page.vue')['default']
     PageContent: typeof import('./components/App/Layout/PageContent.vue')['default']
