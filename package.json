@@ -9,7 +9,7 @@
     "typecheck": "vue-tsc --noEmit",
     "lint": "eslint --ext \"**/*.{vue,ts,js}\" --ignore-path .gitignore .",
     "lint:fix": "eslint --fix --ext .ts,vue --ignore-path .gitignore .",
-    "deploy": "npm version patch --no-git-tag-version && git add . && git commit -m 'deploy: new version' && git push origin main"
+    "deploy": "git add . && git commit -m 'deploy: new version' && git push origin main"
   },
   "dependencies": {
     "@vueuse/components": "^6.9.1",
@@ -61,5 +61,5 @@
     "vite-ssg": "^0.15.6",
     "vue-tsc": "^0.28.10"
   },
-  "version": "0.0.9"
+  "version": "0.0.1"
 }

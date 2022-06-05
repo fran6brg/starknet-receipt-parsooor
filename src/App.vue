@@ -22,7 +22,7 @@ useHead({
 	meta: [
 		{
 			name: "starknet receipt parsooor",
-			content: "starknet receipt parsooor",
+			content: "check tx status while waiting for starknet explorers to index it",
 		},
 	],
 });
