@@ -67,7 +67,8 @@ const handleHashValueChange = ({ value, error }: { value: string; error: string 
 
 		<!-- receipt -->
 		<PageContent>
-			<Suspense v-if="hash && !hashError" :key="hash">
+			<p v-if="state.error">{{ state.error }}</p>
+			<Suspense v-else-if="hash && !hashError" :key="hash">
 				<!-- main content -->
 				<Receipt :hash="hash" />
 
