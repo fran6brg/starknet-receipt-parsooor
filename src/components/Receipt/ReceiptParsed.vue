@@ -25,7 +25,7 @@ const { state } = useApp();
 
 // refs
 const statusInfo = ref(
-	"ACCEPTED_ON_L1: Your transaction has been settled on L1.<br /><br />REJECTED: Your transaction is is invalid. Check the error section.<br /><br />RECEIVED: Your transaction has been received on the L2 network and is being processed.",
+	"<p class='text-xs'>ACCEPTED_ON_L1: Your transaction has been settled on L1.<br /><br />REJECTED: Your transaction is is invalid. Check the error section.<br /><br />RECEIVED: Your transaction has been received on the L2 network and is being processed.</p>",
 );
 // computeds
 // watchers

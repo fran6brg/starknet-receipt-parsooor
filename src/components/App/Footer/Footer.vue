@@ -15,6 +15,10 @@ import { Icon } from "@iconify/vue";
 				<Icon icon="carbon:information" class="h-3 w-3" />
 				<p class="font-ptmono font-bold flex hover:opacity-100">Better on google chrome</p>
 			</div>
+			<div class="flex items-center gap-2">
+				<Icon icon="carbon:in-progress-warning" class="h-3 w-3" />
+				<p class="font-ptmono font-bold flex hover:opacity-100">alpha release, give us feedbacks 👩‍💻</p>
+			</div>
 		</div>
 
 		<!-- links -->

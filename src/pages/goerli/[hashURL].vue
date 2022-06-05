@@ -73,7 +73,8 @@ const handleHashValueChange = ({ value, error }: { value: string; error: string 
 					<span class="italic">{{ `https://alpha4.starknet.io/feeder_gateway/get_transaction_receipt?transactionHash=${hash}` }}</span>
 				</p>
 				<pre class="wsc-text-error">{{ state.error }}</pre>
-				<p>sry fren, u can still dm us on twitter for help</p>
+				<p>-> try opening inspector > select 'application' tab > click 'clear site data'</p>
+				<p>if it doesn't work, dm us on twitter :)</p>
 			</div>
 			<Suspense v-else-if="hash && !hashError" :key="hash">
 				<!-- main content -->
