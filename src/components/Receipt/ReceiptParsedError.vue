@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useApp } from "~/composables";
-import { IReceiptTransactionFailureReason } from "~/interfaces";
+import { ITransactionReceipt } from "~/interfaces";
 import { PropType } from "vue";
 
 /**
@@ -8,13 +8,12 @@ import { PropType } from "vue";
  */
 
 defineProps({
-	error: {
-		type: Object as PropType<undefined | IReceiptTransactionFailureReason>,
+	receipt: {
+		type: Object as PropType<ITransactionReceipt>,
 		required: true,
 		default: () => undefined,
 	},
 });
-
 /**
  * state
  */
@@ -29,22 +28,28 @@ const isCollapsed = ref(false);
 // hooks
 onErrorCaptured((error) => {
 	state.error = new Error(JSON.stringify(error));
-	console.warn("component/receiptparsederror", error);
+	console.warn("component/errorparsederror", error);
 });
 </script>
 
 <template>
-	<div class="flex flex-col items-end w-full bg-gradient-to-tr from-gray-800/20 via-blue-400/10 to-cyan-400/30 rounded-xl">
+	<div
+		class="flex flex-col items-end w-full rounded-xl"
+		:class="{
+			'bg-gradient-to-bl from-blue-800/20 via-blue-400/10 to-cyan-400/30': receipt?.transaction_failure_reason,
+			'wsc-bg-default bg-opacity-20': !receipt?.transaction_failure_reason,
+		}"
+	>
 		<button
 			class="flex justify-between items-center w-full py-4 px-8 cursor-pointer"
-			:class="{ 'cursor-not-allowed': !error }"
-			:disabled="!error"
+			:class="{ 'cursor-not-allowed': !receipt?.transaction_failure_reason }"
+			:disabled="!receipt?.transaction_failure_reason"
 			@click="isCollapsed = !isCollapsed"
 		>
-			<p v-if="error" class="wsc-text-starknet-orange">Error</p>
+			<p v-if="receipt?.transaction_failure_reason" class="wsc-text-starknet-orange">Error</p>
 			<p v-else class="wsc-text-default">No error</p>
 		</button>
-		<Collapse v-if="error" :is-collapsed="isCollapsed">
+		<Collapse v-if="receipt?.transaction_failure_reason" :is-collapsed="isCollapsed">
 			<transition name="fade" mode="out-in">
 				<div
 					v-show="isCollapsed"
@@ -52,9 +57,9 @@ onErrorCaptured((error) => {
 				>
 					<!-- row -->
 					<div class="flex flex-col gap-1">
-						<p class="wsc-text-default underline">error_code:</p>
+						<p class="wsc-text-default underline">code:</p>
 						<div class="h-full flex items-center">
-							<p v-if="error.error_code">{{ error.error_code }}</p>
+							<p v-if="receipt?.transaction_failure_reason.code">{{ receipt?.transaction_failure_reason.code }}</p>
 							<p v-else>none</p>
 						</div>
 					</div>
@@ -63,7 +68,10 @@ onErrorCaptured((error) => {
 					<div class="flex flex-col gap-1">
 						<p class="wsc-text-default underline">error_message:</p>
 						<div class="h-full flex items-center">
-							<p v-if="error.error_message" v-html="error.error_message.replace(/(?:\r\n|\r|\n)/g, '<br />')" />
+							<p
+								v-if="receipt?.transaction_failure_reason.error_message"
+								v-html="receipt?.transaction_failure_reason.error_message.replace(/(?:\r\n|\r|\n)/g, '<br />')"
+							/>
 							<p v-else>none</p>
 						</div>
 					</div>

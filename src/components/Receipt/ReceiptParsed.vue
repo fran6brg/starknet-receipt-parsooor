@@ -39,7 +39,7 @@ onErrorCaptured((error) => {
 <template>
 	<div class="flex flex-col gap-6">
 		<!-- block -->
-		<div class="flex <md:flex-col gap-6">
+		<div class="flex <md:flex-col gap-6 h-12">
 			<div class="flex flex-col gap-1">
 				<p class="wsc-text-default">block_hash</p>
 				<AddressDesigned v-if="receipt.block_hash" :address="receipt.block_hash" type="block" />
@@ -70,7 +70,7 @@ onErrorCaptured((error) => {
 			}"
 		>
 			<!-- general  -->
-			<div class="flex <md:flex-col gap-6">
+			<div class="flex <md:flex-col gap-6 h-12">
 				<div class="flex flex-col gap-1">
 					<div class="flex gap-1.5">
 						<p class="wsc-text-default">status</p>
@@ -110,16 +110,16 @@ onErrorCaptured((error) => {
 			</div>
 
 			<!-- messages -->
-			<ReceiptParsedMessages :messages="receipt.messages" />
+			<ReceiptParsedMessages :messages="receipt.l2_to_l1_messages" />
 
 			<!-- events -->
 			<ReceiptParsedEvents :events="receipt.events" />
 
 			<!-- resources -->
-			<ReceiptParsedResources v-if="receipt.execution_resources" :resources="receipt.execution_resources" />
+			<ReceiptParsedResources :receipt="receipt" />
 
 			<!-- errors -->
-			<ReceiptParsedError v-if="receipt.transaction_failure_reason" :error="receipt.transaction_failure_reason" />
+			<ReceiptParsedError :receipt="receipt" />
 		</div>
 	</div>
 </template>

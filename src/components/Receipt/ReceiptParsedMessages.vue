@@ -9,9 +9,8 @@ import { PropType } from "vue";
 
 defineProps({
 	messages: {
-		type: Object as PropType<IReceiptL2ToL1Messages>,
+		type: Object as PropType<IReceiptL2ToL1Messages[]>,
 		required: true,
-		default: () => [],
 	},
 });
 
@@ -34,7 +33,13 @@ onErrorCaptured((error) => {
 </script>
 
 <template>
-	<div class="flex flex-col items-end w-full bg-gradient-to-tr from-gray-800/20 via-blue-400/10 to-cyan-400/30 rounded-xl">
+	<div
+		class="flex flex-col items-end w-full rounded-xl"
+		:class="{
+			'bg-gradient-to-tr from-blue-800/20 via-blue-400/10 to-cyan-400/30': messages.length,
+			'wsc-bg-default bg-opacity-20': !messages.length,
+		}"
+	>
 		<button
 			class="flex justify-between items-center w-full py-4 px-8 cursor-pointer"
 			:class="{ 'cursor-not-allowed': !messages.length }"
