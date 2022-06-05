@@ -46,7 +46,7 @@ onErrorCaptured((error) => {
 			:disabled="!messages.length"
 			@click="isCollapsed = !isCollapsed"
 		>
-			<p v-if="messages.length" class="wsc-text-starknet-orange">{{ messages.length }} message{{ messages.length ? "s" : "" }}</p>
+			<p v-if="messages.length" class="wsc-text-starknet-orange">{{ messages.length }} message{{ messages.length > 1 ? "s" : "" }}</p>
 			<p v-else class="wsc-text-default">No message</p>
 		</button>
 		<Collapse v-if="messages.length" :is-collapsed="isCollapsed">
