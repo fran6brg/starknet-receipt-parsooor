@@ -132,6 +132,7 @@ export const useGateway = () => {
 		} catch (error) {
 			console.warn("gateway/getTxStatus/error", { error });
 			state.error = new Error(JSON.stringify(error));
+			return null;
 		} finally {
 			// set state
 			isFetching.value = false;
