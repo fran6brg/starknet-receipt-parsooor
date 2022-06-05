@@ -36,7 +36,7 @@ onErrorCaptured((error) => {
 	<div
 		class="flex flex-col items-end w-full rounded-xl"
 		:class="{
-			'bg-gradient-to-tr from-blue-800/20 via-blue-400/10 to-cyan-400/30': messages.length,
+			'bg-gradient-to-tr from-blue-800/20 via-blue-400/10 to-orange-400/20': messages.length,
 			'wsc-bg-default bg-opacity-20': !messages.length,
 		}"
 	>
@@ -53,9 +53,26 @@ onErrorCaptured((error) => {
 			<transition name="fade" mode="out-in">
 				<div
 					v-show="isCollapsed"
-					class="mx-4 mb-4 flex flex-col border-1 wsc-border-default wsc-transition-all rounded-2xl px-6 py-3 bg-blue-gray-700 bg-opacity-20 gap-2 relative"
+					class="mx-4 mb-4 flex flex-col border-1 wsc-border-default wsc-transition-all rounded-2xl p-3 bg-blue-gray-700 bg-opacity-20 gap-2 relative"
 				>
-					<pre>{{ messages }}</pre>
+					<div
+						v-for="(message, index) in messages"
+						:key="`message-${index}`"
+						class="flex flex-col gap-2 border-1 p-3 wsc-border-default border-opacity-15 rounded-xl"
+					>
+						<div class="flex items-center gap-2">
+							<p v-if="message.from_address" class="wsc-text-default">from_address</p>
+							<AddressDesigned v-if="message.from_address" :address="message.from_address" type="contract" />
+						</div>
+						<div class="flex items-center gap-2">
+							<p v-if="message.to_address" class="wsc-text-default">to_address</p>
+							<AddressDesigned v-if="message.to_address" :address="message.to_address" type="contract" />
+						</div>
+						<div class="flex flex-col items-start gap-2">
+							<p v-if="message.payload" class="wsc-text-default">payload</p>
+							<pre>{{ message.payload }}</pre>
+						</div>
+					</div>
 				</div>
 			</transition>
 		</Collapse>

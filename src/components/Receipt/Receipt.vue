@@ -51,7 +51,7 @@ onErrorCaptured((error) => {
 			<!-- tx link -->
 			<LinkToVoyager type="tx" :address="props.hash" class="flex gap-1 items-center group opacity-50">
 				<p class="flex items-center text-xs truncate">
-					open in <span class="group-hover:underline mx-1.5">goerli.voyager.online</span> <StarknetLogo class="w-4 h-4" />
+					if indexed, open in <span class="group-hover:underline mx-1.5">goerli.voyager.online</span> <StarknetLogo class="w-4 h-4" />
 				</p>
 			</LinkToVoyager>
 		</div>

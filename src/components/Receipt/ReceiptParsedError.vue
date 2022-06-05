@@ -36,7 +36,7 @@ onErrorCaptured((error) => {
 	<div
 		class="flex flex-col items-end w-full rounded-xl"
 		:class="{
-			'bg-gradient-to-bl from-blue-800/20 via-blue-400/10 to-cyan-400/30': receipt?.transaction_failure_reason,
+			'bg-gradient-to-bl from-blue-800/20 via-blue-400/10 to-orange-400/20': receipt?.transaction_failure_reason,
 			'wsc-bg-default bg-opacity-20': !receipt?.transaction_failure_reason,
 		}"
 	>
@@ -53,7 +53,7 @@ onErrorCaptured((error) => {
 			<transition name="fade" mode="out-in">
 				<div
 					v-show="isCollapsed"
-					class="mx-4 mb-4 flex flex-col border-1 wsc-border-default wsc-transition-all rounded-2xl px-6 py-3 bg-blue-gray-700 bg-opacity-20 gap-4 relative"
+					class="mx-4 mb-4 flex flex-col border-1 wsc-border-default wsc-transition-all rounded-2xl p-3 bg-blue-gray-700 bg-opacity-20 gap-4 relative"
 				>
 					<!-- row -->
 					<div class="flex flex-col gap-1">

@@ -45,7 +45,7 @@ defineProps({
 const formatAddress = (address: string): string => {
 	if (!address) return "Invalid address";
 	if (!address.startsWith("0x")) return "Invalid address";
-	if (address.length < 60) return "Invalid address";
+	if (address.length < 40) return "Invalid address";
 	return `${address.substring(0, 6).toLowerCase()}...${address.substr(-4).toLowerCase()}`;
 };
 </script>

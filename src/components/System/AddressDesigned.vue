@@ -39,6 +39,8 @@ const { copy, copied } = useClipboard({ source: props.address });
 /**
  * methods
  */
+
+const isL2Address = (address: string) => address.length > 42;
 </script>
 
 <template>
@@ -47,15 +49,19 @@ const { copy, copied } = useClipboard({ source: props.address });
 		:class="{ 'text-xs': size === 'xs', 'text-sm': size === 'sm', 'text-md': size === 'md' }"
 	>
 		<template v-if="address">
-			<JazzIconWrapper v-if="type === 'contract'" :address="address" :size="size" />
+			<!-- v-if="type === 'contract'" -->
+			<JazzIconWrapper :address="address" :size="size" />
 			<Address :address="address" />
-			<button class="hover:wsc-text-from" @click="copy(value)">
+			<button class="hover:wsc-text-from" @click="copy(address)">
 				<Icon v-if="copied" icon="carbon:checkmark" class="h-3 w-3" />
 				<Icon v-else icon="carbon:copy" class="h-3 w-3" />
 			</button>
-			<LinkToVoyager :type="type" :address="address" class="hover:wsc-text-from">
+			<LinkToVoyager v-if="isL2Address(address)" :type="type" :address="address" class="hover:wsc-text-from">
 				<Icon icon="ic:baseline-open-in-new" class="h-3 w-3" />
 			</LinkToVoyager>
+			<LinkToEtherscan v-else :type="type" :address="address" class="hover:wsc-text-from">
+				<Icon icon="ic:baseline-open-in-new" class="h-3 w-3" />
+			</LinkToEtherscan>
 		</template>
 		<template v-else>
 			<Address :address="address" />

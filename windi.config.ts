@@ -48,7 +48,7 @@ export const colors = {
 		error: "red-500",
 	},
 	gradient: {
-		from: "green-400",
+		from: "teal-600",
 		via: "teal-400",
 		to: "teal-400",
 	},

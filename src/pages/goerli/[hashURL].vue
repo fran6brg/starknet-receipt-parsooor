@@ -58,7 +58,7 @@ const handleHashValueChange = ({ value, error }: { value: string; error: string 
 		<!-- dev only -->
 		<div v-if="state.env === 'dev'" class="flex gap-2 text-xs">
 			<button class="p-2 border-1" @click="hash = receiptError">error</button>
-			<button class="p-2 border-1" @click="hash = receiptL1toL2">l1 -> l2</button>
+			<button class="p-2 border-1" @click="hash = receiptL1toL2">l2 -> l1</button>
 			<button class="p-2 border-1" @click="hash = receiptFake">fake tx</button>
 		</div>
 
