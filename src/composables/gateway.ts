@@ -79,7 +79,7 @@ export const useGateway = () => {
 
 			// set state
 			isFetching.value = true;
-			console.warn("useGateway/getTxStatus/transactionHash", { transactionHash });
+			state.error = undefined;
 
 			// build endpoint
 			const endpoint = `${root}/get_transaction_receipt?transactionHash=${transactionHash}`;
@@ -89,13 +89,12 @@ export const useGateway = () => {
 
 			// parse response
 			const data: ITransactionReceipt = await response.json();
-			// console.log("status", { data });
 
 			// ret
 			return data;
 		} catch (error) {
 			console.warn("gateway/getTxStatus/error", { error });
-			state.error = new Error(JSON.stringify(error));
+			state.error = new Error(String(error));
 			return null;
 		} finally {
 			// set state

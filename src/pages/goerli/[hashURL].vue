@@ -67,7 +67,11 @@ const handleHashValueChange = ({ value, error }: { value: string; error: string 
 
 		<!-- receipt -->
 		<PageContent>
-			<p v-if="state.error">{{ state.error }}</p>
+			<div v-if="state.error" class="flex flex-col gap-2">
+				<p>Some error occured while querying <span class="italic">https://alpha4.starknet.io/feeder_gateway</span></p>
+				<pre class="wsc-text-error">{{ state.error }}</pre>
+				<p>sry fren, u can still dm us on twitter for help</p>
+			</div>
 			<Suspense v-else-if="hash && !hashError" :key="hash">
 				<!-- main content -->
 				<Receipt :hash="hash" />
