@@ -9,15 +9,15 @@ import { Icon } from "@iconify/vue";
 		<div class="flex flex-col gap-1 py-2">
 			<div class="flex items-center gap-2 opacity-30 hover:opacity-100">
 				<Icon icon="carbon:laptop" class="h-3 w-3" />
-				<p class="font-ptmono font-bold flex hover:opacity-100">UI v{{ packages.version }}</p>
+				<p class="font-ptmono font-bold flex hover:opacity-100">ui v{{ packages.version }}</p>
 			</div>
 			<div class="flex items-center gap-2 opacity-30 hover:opacity-100">
 				<Icon icon="carbon:information" class="h-3 w-3" />
-				<p class="font-ptmono font-bold flex hover:opacity-100">Better on google chrome</p>
+				<p class="font-ptmono font-bold flex hover:opacity-100">better on google chrome</p>
 			</div>
 			<div class="flex items-center gap-2">
 				<Icon icon="carbon:in-progress-warning" class="h-3 w-3" />
-				<p class="font-ptmono font-bold flex hover:opacity-100">alpha release, give us feedbacks 👩‍💻</p>
+				<p class="font-ptmono font-bold flex hover:opacity-100">α release => gimme feedbacks 👩‍💻</p>
 			</div>
 		</div>
 

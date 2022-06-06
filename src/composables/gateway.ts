@@ -6,7 +6,6 @@ import { useApp } from "~/composables";
  */
 
 const root = "https://alpha4.starknet.io/feeder_gateway";
-const receiptError = "0x51ee32b852d72a4d2da22e3c9e12cf22528ef1d913013b7f15cfbcad3a1de27";
 const receiptErrorResult: ITransactionReceipt = {
 	status: "REJECTED",
 	transaction_failure_reason: {
@@ -18,7 +17,6 @@ const receiptErrorResult: ITransactionReceipt = {
 	l2_to_l1_messages: [],
 	events: [],
 };
-const receiptL1toL2 = "0x1569d668b378747f7768e2931105b3e1baca2b03d0f0f12a4c10dd94edca20c";
 const receiptL1toL2Result: ITransactionReceipt = {
 	status: "ACCEPTED_ON_L1",
 	block_hash: "0x2d500ffedac1ccf0d852877e500c68af8727f721b28328fa3b152fb086226d5",
@@ -60,6 +58,7 @@ const receiptL1toL2Result: ITransactionReceipt = {
 
 // refs
 const isFetching = ref(false);
+const fetchedReceipts = ref<ITransactionReceipt[]>([receiptErrorResult, receiptL1toL2Result]);
 
 export const useGateway = () => {
 	// imports
@@ -74,8 +73,8 @@ export const useGateway = () => {
 			// error check
 			if (!transactionHash) return null;
 			if (!transactionHash.startsWith("0x")) return null;
-			if (state.env === "dev" && transactionHash === receiptError) return receiptErrorResult;
-			if (state.env === "dev" && transactionHash === receiptL1toL2) return receiptL1toL2Result;
+			const rIndex = fetchedReceipts.value.findIndex((r) => r.transaction_hash.toLowerCase() === transactionHash.toLowerCase());
+			if (rIndex >= 0) return fetchedReceipts.value[rIndex];
 
 			// set state
 			isFetching.value = true;

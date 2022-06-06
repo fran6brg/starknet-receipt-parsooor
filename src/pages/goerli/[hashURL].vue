@@ -70,10 +70,16 @@ const handleHashValueChange = ({ value, error }: { value: string; error: string 
 			<div v-if="state.error" class="flex flex-col gap-2">
 				<p>
 					Some error occured while querying
-					<span class="italic">{{ `https://alpha4.starknet.io/feeder_gateway/get_transaction_receipt?transactionHash=${hash}` }}</span>
+					<a
+						:href="`https://alpha4.starknet.io/feeder_gateway/get_transaction_receipt?transactionHash=${hash}`"
+						target="_blank"
+						rel="noopener"
+						class="italic hover:underline"
+						>{{ `https://alpha4.starknet.io/feeder_gateway/get_transaction_receipt?transactionHash=${hash}` }}</a
+					>
 				</p>
 				<pre class="wsc-text-error">{{ state.error }}</pre>
-				<p>-> try opening inspector > select 'application' tab > click 'clear site data'</p>
+				<p class="my-4">-> 1) drop hard refresh OR 2) open inspector > select 'application' tab > click 'clear site data'</p>
 				<p>if it doesn't work, dm us on twitter :)</p>
 			</div>
 			<Suspense v-else-if="hash && !hashError" :key="hash">
@@ -81,7 +87,7 @@ const handleHashValueChange = ({ value, error }: { value: string; error: string 
 				<Receipt :hash="hash" />
 
 				<!-- loading state -->
-				<template #fallback>Fetching receipt...(sometimes you must be patient)</template>
+				<template #fallback>Fetching receipt... "patience is a virtue" - lol)</template>
 			</Suspense>
 			<p v-else-if="!hash">paste your hash (0x42...42) in the form ⬆️</p>
 		</PageContent>

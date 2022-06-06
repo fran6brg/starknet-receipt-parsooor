@@ -3,6 +3,7 @@ import { useApp } from "~/composables";
 import { ITransactionReceipt } from "~/interfaces";
 import { PropType } from "vue";
 import ReceiptParsedResources from "./ReceiptParsedResources.vue";
+import { ethers } from "ethers";
 
 /**
  * props
@@ -103,7 +104,13 @@ onErrorCaptured((error) => {
 				<div class="flex flex-col gap-1">
 					<p class="wsc-text-default">actual_fee</p>
 					<div class="h-full flex items-center">
-						<p v-if="receipt.actual_fee">{{ receipt.actual_fee }}</p>
+						<p v-if="receipt.actual_fee">
+							{{ receipt.actual_fee }} |
+							{{ ethers.utils.formatUnits(ethers.BigNumber.from(receipt.actual_fee).toString(), 18).slice(0, 10) }} ETH |
+							{{
+								String(Number(ethers.utils.formatUnits(ethers.BigNumber.from(receipt.actual_fee).toString(), 18)) * 1800).slice(0, 5)
+							}}$
+						</p>
 						<p v-else>none</p>
 					</div>
 				</div>
